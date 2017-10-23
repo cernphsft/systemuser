@@ -16,6 +16,10 @@ mkdir -p $SCRATCH_HOME
 echo "This directory is temporary and will be deleted when your SWAN session ends!" > $SCRATCH_HOME/IMPORTANT.txt
 chown -R $USER:$USER $SCRATCH_HOME
 
+echo "Setting directory for Notebook backup"
+export USERDATA_PATH=/srv/singleuser/userdata
+chown -R $USER:$USER $USERDATA_PATH
+
 # Setup the LCG View on CVMFS
 echo "Setting up environment from CVMFS"
 export LCG_VIEW=$ROOT_LCG_VIEW_PATH/$ROOT_LCG_VIEW_NAME/$ROOT_LCG_VIEW_PLATFORM
@@ -28,7 +32,7 @@ JPY_LOCAL_DIR=$SCRATCH_HOME/.local
 mkdir -p $JPY_LOCAL_DIR
 export JUPYTER_CONFIG_DIR=$JPY_DIR
 # Our kernels will be in $JPY_LOCAL_DIR/share/jupyter, $LCG_VIEW/share/jupyter is needed for the notebook extensions
-export JUPYTER_PATH=$JPY_LOCAL_DIR/share/jupyter:$LCG_VIEW/share/jupyter
+export JUPYTER_PATH=$JPY_LOCAL_DIR/share/jupyter:$LCG_VIEW/share/jupyter$EXTRA_LIBS
 export KERNEL_DIR=$JPY_LOCAL_DIR/share/jupyter/kernels
 mkdir -p $KERNEL_DIR
 export JUPYTER_RUNTIME_DIR=$JPY_LOCAL_DIR/share/jupyter/runtime
