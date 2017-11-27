@@ -80,6 +80,9 @@ sed -i "s/python/python$PYVERSION/g" $KERNEL_DIR/root/kernel.json # Set Python v
 # R
 cp -rL $LCG_VIEW/share/jupyter/kernels/ir $KERNEL_DIR
 sed -i "s/IRkernel::main()/options(bitmapType='cairo');IRkernel::main()/g" $KERNEL_DIR/ir/kernel.json # Force cairo for graphics
+# Octave
+cp -rL $LCG_VIEW/share/jupyter/kernels/octave $KERNEL_DIR
+sed -i "s/python/python$PYVERSION/g" $KERNEL_DIR/octave/kernel.json # Set Python version in kernel
 
 chown -R $USER:$USER $JPY_DIR $JPY_LOCAL_DIR $IPYTHONDIR
 export SWAN_ENV_FILE=/tmp/swan.sh
